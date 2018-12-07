@@ -14,3 +14,9 @@ export function getAllMessages(){
     }
 }
 
+export const sendNewMessage = (msg) => async dispatch => {
+    return db.ref('/messages').push({
+        message: msg,
+        name: localStorage.getItem('chat_name'),
+    });
+}

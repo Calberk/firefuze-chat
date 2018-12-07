@@ -6,6 +6,7 @@ import {Route, Switch} from 'react-router-dom';
 import Home from './home';
 import Chat from './chat';
 import NonFound from './404';
+import SetName from './set_name'
 
 const App = () => (
     <div>
@@ -14,7 +15,8 @@ const App = () => (
             <Switch>
                 <Route exact path = '/' component={Home}/>
                 <Route path = '/chat' component={Chat}/>
-                <Route component={NonFound}/>    
+                <Route path = '/set-name' component= {SetName}/>
+                <Route component={NonFound}/>
             </Switch>
             
         </div>
