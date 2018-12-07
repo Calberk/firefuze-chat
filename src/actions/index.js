@@ -2,8 +2,9 @@ import types from './types'
 import {db} from '../firebase'
 
 export function getAllMessages(){
-    return async function(dispatch){
-        db.ref('/messages').on('value', (snapshot) => {
+    return function(dispatch){
+        const dbRef = db.ref('/messages');
+        dbRef.on('value', (snapshot) => {
             // console.log('DB Snapshot', snapshot.val())
 
             dispatch({
@@ -11,6 +12,8 @@ export function getAllMessages(){
                 messages: snapshot.val()
             })
         });
+
+        return dbRef;
     }
 }
 

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {getAllMessages} from '../actions'
 import {Field, reduxForm} from 'redux-form';
 import Input from './input';
+import {sendNewMessage} from '../actions'
 
 class Chat extends Component {
 
@@ -12,11 +13,20 @@ class Chat extends Component {
         }
 
 
-        this.props.getAllMessages();
+        this.dbRef = this.props.getAllMessages();
     }
 
-    handleMessage = ({message}) =>{
-        console.log('send message', message);
+    componentWillUnmount(){
+        if(this.dbRef){
+            this.dbRef.off();
+        }
+    }
+
+    handleMessage = async ({message}) =>{
+       await this.props.sendNewMessage(message);
+        // console.log('send message', message);
+
+        this.props.reset();
     }
 
     render(){
@@ -33,7 +43,7 @@ class Chat extends Component {
                 </li>
             )
         })
-        console.log('messageselements', messageElements)
+        // console.log('messageselements', messageElements)
 
         return(
             <div>
@@ -65,5 +75,6 @@ export default reduxForm({
     form: 'new-message',
     validate
 })(connect(mapStateToProps, {
-    getAllMessages
+    getAllMessages,
+    sendNewMessage
 })(Chat));
