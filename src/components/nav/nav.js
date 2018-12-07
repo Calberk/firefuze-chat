@@ -18,7 +18,7 @@ class Nav extends Component {
     }
 
     componentDidMount(){
-        console.log('side ref', this.sideNav)
+        // console.log('side ref', this.sideNav)
         M.Sidenav.init(this.sideNav)
     }
 
